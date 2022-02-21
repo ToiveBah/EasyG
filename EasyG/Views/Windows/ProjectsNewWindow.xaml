@@ -11,50 +11,6 @@
             <ColumnDefinition Width="163*"/>
             <ColumnDefinition Width="637*"/>
         </Grid.ColumnDefinitions>
-
-        <Grid>
-            <StackPanel Background="#FFB4AFAF">
-                <StackPanel x:Name="EasyGidro">
-                    <StackPanel.Resources>
-                        <Style x:Key="buttonStyle" TargetType="Button">
-                            <Setter Property="Button.Height" Value="25"/>
-                            <Setter Property="Button.FontSize" Value="12"/>
-                            <Setter Property="Button.HorizontalContentAlignment" Value="Left"/>
-                            <Setter Property="Button.Padding" Value="10,1,10,1"/>
-                            <Setter Property="Button.Background" Value="#FFB4AFAF"/>
-                            <Setter Property="Button.BorderThickness" Value="0"/>
-                        </Style>
-                    </StackPanel.Resources>
-                    <Label x:Name="lblInstruction" 
-                           FontSize="20" 
-                           Content="EasyGidro" 
-                           FontWeight="Bold"
-                           VerticalContentAlignment="Stretch" 
-                           HorizontalContentAlignment="Center" 
-                           ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                           Background="#FF7382F0"/>
-                    <Button x:Name="Быстрый_старт" Style="{StaticResource buttonStyle}" Content="Быстрый старт"/>
-                    <Button x:Name="Проекты" Style="{StaticResource buttonStyle}" Content="Проекты"/>
-                    <Button x:Name="Задания" Style="{StaticResource buttonStyle}" Content="Задания"/>
-                    <Button x:Name="Программы" Style="{StaticResource buttonStyle}" Content="Программы"/>
-                    <Button x:Name="Рассылка_запросов" Style="{StaticResource buttonStyle}" Content="Рассылка запросов"/>
-                    <Button x:Name="Данные" Style="{StaticResource buttonStyle}" Content="Данные"/>
-                    <Button x:Name="Отчеты_ИГМИ" Style="{StaticResource buttonStyle}" Content="Отчеты ИГМИ"/>
-                    <Button x:Name="Справочник" Style="{StaticResource buttonStyle}" Content="Справочник"/>
-                    <Button x:Name="Настройки" Style="{StaticResource buttonStyle}" Content="Настройки"/>
-                    <Button x:Name="Инструкция" Style="{StaticResource buttonStyle}" Content="Инструкция"/>
-                    <TextBlock TextWrapping="Wrap" 
-                               Text="Bogza, Bakhlykova @2022" 
-                               TextAlignment="Center" 
-                               FontSize="8" 
-                               Visibility="Visible" 
-                               VerticalAlignment="Bottom"
-                               Margin="0,135,0,0"/>
-                </StackPanel>
-
-            </StackPanel>
-
-        </Grid>
         <Label Grid.Column="1" Content="Проекты" 
                HorizontalAlignment="Left" Margin="18,37,0,0"
                VerticalAlignment="Top" FontWeight="Bold" FontSize="16" 

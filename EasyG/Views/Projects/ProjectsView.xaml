@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="EasyG.Views.Projects.ProjectsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EasyG.Views.Projects"
+             xmlns:projects="clr-namespace:EasyG.ViewModels.Projects"
+             xmlns:resources="clr-namespace:EasyG.Resources"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             Dialog:DialogParticipation.Register="{Binding}"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance projects:ProjectsViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <mah:MetroHeader Header="{x:Static resources:LocalizationResources.ProjectsView_Projects}" 
+                         mah:HeaderedControlHelper.HeaderFontWeight="SemiBold" Margin="5" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="5 0 0 5" Orientation="Horizontal">
+                <Button Command="{Binding Path=CreateNewProjectCommand}"
+                    ToolTip="{x:Static resources:LocalizationResources.ProjectsView_AddNewProject}" Style="{StaticResource ToolBarButtonStyle}">
+                    <iconPacks:BootstrapIcons Kind="Plus" Width="10"/>
+                </Button>
+                <Button ToolTip="{x:Static resources:LocalizationResources.ProjectsView_ExportPDF}" Style="{StaticResource ToolBarButtonStyle}">
+                    <iconPacks:BootstrapIcons Kind="FilePdf" Width="10" />
+                </Button>
+                <Button ToolTip="{x:Static resources:LocalizationResources.ProjectsView_Print}" Style="{StaticResource ToolBarButtonStyle}">
+                    <iconPacks:BootstrapIcons Kind="Printer" Width="10" />
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2"  Margin="5 0 0 5" Orientation="Horizontal">
+                <TextBlock Text="{x:Static resources:LocalizationResources.ProjectsView_Search}" VerticalAlignment="Center" Margin="0 0 8 0"/>
+                <TextBox Text="{Binding Path=SearchText, Mode=TwoWay}" Width="150" mah:TextBoxHelper.Watermark="{x:Static resources:LocalizationResources.MainWindow_Controls_SearchWatermark}" />
+
+                <TextBlock Text="{x:Static resources:LocalizationResources.ProjectsView_ShowRecordsPart1}" VerticalAlignment="Center" Margin="8 0 8 0"/>
+                <ComboBox StaysOpenOnEdit="True" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60">
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="Все"/>
+                </ComboBox>
+                <TextBlock Text="{x:Static resources:LocalizationResources.ProjectsView_ShowRecordsPart2}" VerticalAlignment="Center" Margin="8 0 8 0"/>
+            </StackPanel>
+        </Grid>
+        
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" GridLinesVisibility="Horizontal" ItemsSource="{Binding Path=ProjectsView}" SelectedItem="{Binding Path=Project, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Created}" Width="*" Binding="{Binding Path=CreatedDate}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Edited}" Width="*" Binding="{Binding Path=ModifiedDate}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Name}" Width="*" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_ShortName}" Width="*" Binding="{Binding Path=ShortName}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Address}" Width="*" Binding="{Binding Path=Address}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Company}" Width="*" Binding="{Binding Path=Company}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Region}" Width="*" Binding="{Binding Path=Region}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Delivery}" Width="*" Binding="{Binding Path=DeliveryDate}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_Description}" Width="*" Binding="{Binding Path=Description}"/>
+                <DataGridTextColumn Header="{x:Static resources:LocalizationResources.ProjectsView_Grid_State}" Width="*" Binding="{Binding Path=State}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

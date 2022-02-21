@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sharedVM="clr-namespace:EasyG.ViewModels.Shared"
+                    xmlns:sharedView="clr-namespace:EasyG.Views.Shared"
+                    xmlns:projectsView="clr-namespace:EasyG.Views.Projects"
+                    xmlns:projectsVM="clr-namespace:EasyG.ViewModels.Projects"
+                    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro">
+
+    <DataTemplate DataType="{x:Type sharedVM:NavigationPanelViewModel}">
+        <sharedView:NavigationPanelView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type projectsVM:ProjectsViewModel}">
+        <projectsView:ProjectsView/>
+    </DataTemplate>
+
+</ResourceDictionary>

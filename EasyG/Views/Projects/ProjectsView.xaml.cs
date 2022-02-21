@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EasyG
+namespace EasyG.Views.Projects
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProjectsView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProjectsView : UserControl
     {
-        public MainWindow()
+        public ProjectsView()
         {
             InitializeComponent();
         }

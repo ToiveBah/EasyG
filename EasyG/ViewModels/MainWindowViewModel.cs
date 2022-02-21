@@ -1,27 +1,68 @@
-﻿using EasyG.ViewModels.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using Autofac;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using EasyG.Messages;
+using EasyG.Repositories;
+using EasyG.ViewModels.Shared;
 
 namespace EasyG.ViewModels
 {
-    internal class MainWindowViewModel : ViewModel
+    public class MainWindowViewModel : ObservableObject, IDisposable
     {
-        #region Заголовок окна
-        private string _Title = "EasyG";
+        private readonly IContainer _container;
+        private readonly IRepository _repository;
+        private readonly IMessenger _messenger;
+        private INavigationPanelViewModel? _navigationPanelViewModel;
+        private INavigationSource? _currentViewModel;
 
-        /// <summary> Заголовок окна </summary>
-        public string Title
+        public MainWindowViewModel(IContainer container, IRepository repository, IMessenger messenger)
         {
-           get => _Title;
-           // set 
-           // {
-              //  if(Equals(_Title, value)) return;
-              //  _Title = value;
-              //  OnPropertyChanged();
-            // }
-            set => Set(ref _Title, value);
+            _repository = repository;
+            _container = container;
+            _messenger = messenger;
+
+            Initialize();
         }
-        #endregion
+
+        public string Title => Resources.LocalizationResources.MainWindow_Title;
+
+        private void Initialize()
+        {
+            _navigationPanelViewModel = _container.Resolve<INavigationPanelViewModel>();
+            var views = _container.Resolve<IEnumerable<INavigationSource>>();
+            _navigationPanelViewModel.RegisterViews(views);
+            RegisterMessages();
+        }
+
+        private void RegisterMessages()
+        {
+            _messenger.Register<CurrentActiveViewChangesMessage>(this, OnNavigationSourceChanged);
+        }
+
+        private void OnNavigationSourceChanged(object recipient, CurrentActiveViewChangesMessage message)
+        {
+            CurrentViewModel = message.NavigationSource;
+        }
+
+        private void UnregisterMessages()
+        {
+            _messenger.Unregister<CurrentActiveViewChangesMessage>(this);
+        }
+
+        public INavigationPanelViewModel? NavigationPanelViewModel => _navigationPanelViewModel;
+
+        public INavigationSource? CurrentViewModel
+        {
+            get => _currentViewModel;
+            set => SetProperty(ref _currentViewModel, value);
+        }
+
+        public void Dispose()
+        {
+            UnregisterMessages();
+            _container.Dispose();
+        }
     }
 }
